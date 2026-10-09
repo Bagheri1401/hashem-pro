@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# Credentials, state and settings
+.env
+.env.*
+!.env.example
+*.env
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.key
+*.pem
+id_ed25519*
+known_hosts
+panel.env
+state.db*
+*.toml.local
+
+# Local tooling
+.DS_Store
+.idea/
+.vscode/
+*.log
