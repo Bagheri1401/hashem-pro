@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block content %}
+<div class="crumb"><a href="/">داشبورد</a> / {{ node.name }}</div><div class="head"><div><span class="eyebrow">FOREIGN NODE #{{ node.id }}</span><h1>{{ node.name }}</h1><p class="muted">مدیریت GRE، سرویس FRP و انتقال پورت از ایران به خارج</p></div><span class="tag">{{ node.foreign_public_ip }}</span></div>
+<div class="stats"><div class="card statistic"><small>IP خارج</small><b class="ltr">{{ node.foreign_public_ip }}</b></div><div class="card statistic"><small>GRE ایران</small><b class="ltr">{{ tunnel_iran }}</b></div><div class="card statistic"><small>GRE خارج</small><b class="ltr">{{ tunnel_foreign }}</b></div><div class="card statistic"><small>پورت کنترل FRP</small><b class="ltr">{{ node.frp_port }}</b></div></div>
+<section class="card"><h2>کنترل تانل</h2><p class="muted">ابتدا مطمئن شوید SSH و نصب FRP آماده است. اعمال تنظیمات سرویس‌ها را در هر دو سرور راه‌اندازی/بازراه‌اندازی می‌کند.</p>
+<div class="buttons"><form method="post" action="/nodes/{{node.id}}/apply"><input type="hidden" name="csrf" value="{{csrf}}"><button class="primary">⚙ اعمال تنظیمات</button></form>
+<form method="post" action="/nodes/{{node.id}}/check"><input type="hidden" name="csrf" value="{{csrf}}"><button>بررسی وضعیت</button></form>
+<form method="post" action="/nodes/{{node.id}}/start"><input type="hidden" name="csrf" value="{{csrf}}"><button>شروع</button></form>
+<form method="post" action="/nodes/{{node.id}}/stop"><input type="hidden" name="csrf" value="{{csrf}}"><button>توقف</button></form><a class="button" href="/nodes/{{node.id}}/logs">لاگ ایران</a></div></section>
+<div class="columns"><section class="card"><h2>پورت‌های کاربران روی ایران</h2><p class="muted">برای هر ردیف اتصال به IP ایران:پورت ایران، به سرویس 127.0.0.1:پورت خارج منتقل می‌شود.</p>
+{% if forwards %}<div class="table-wrap"><table><thead><tr><th>نام</th><th>نوع</th><th>پورت ایران</th><th>پورت خارج</th><th></th></tr></thead><tbody>
+{% for r in forwards %}<tr><td>{{r.name}}</td><td>{{r.protocol|upper}}</td><td>{{r.iran_port}}</td><td>{{r.foreign_port}}</td><td><form method="post" action="/nodes/{{node.id}}/forwards/{{r.id}}/delete"><input name="csrf" type="hidden" value="{{csrf}}"><button class="danger-link" type="submit">حذف</button></form></td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty">هنوز پورتی منتشر نشده است.</div>{% endif %}
+</section><section class="card"><h2>افزودن پورت سرویس</h2><form method="post" action="/nodes/{{node.id}}/forwards" class="stack"><input type="hidden" name="csrf" value="{{csrf}}">
+<label>نام سرویس<input name="name" placeholder="مثلاً سرویس اول" required></label><label>پروتکل<select name="protocol"><option value="tcp">TCP</option><option value="udp">UDP</option></select></label>
+<div class="two"><label>پورت ورودی ایران<input name="iran_port" type="number" min="1024" max="65535" placeholder="15001" required></label><label>پورت سرویس خارج<input name="foreign_port" type="number" min="1" max="65535" placeholder="8080" required></label></div>
+<button class="primary">افزودن قانون</button></form><p class="tip">تغییرات پس از «اعمال تنظیمات» فعال می‌شوند. در فایروال ایران فقط پورت‌های مورد نیاز را باز کنید.</p></section></div>
+<section class="card danger-zone"><h2>حذف سرور</h2><p class="muted">سرویس و تنظیمات مدیریت‌شده روی هر دو ماشین پاک می‌شود. سایر تنظیمات سرورها دست‌نخورده می‌ماند.</p><form method="post" action="/nodes/{{node.id}}/delete" onsubmit="return confirm('حذف کامل این تونل از هر دو سرور؟');"><input type="hidden" name="csrf" value="{{csrf}}"><button class="danger">حذف این سرور</button></form></section>
+{% endblock %}
