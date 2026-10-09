@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block content %}<div class="crumb"><a href="/nodes/{{node.id}}">{{node.name}}</a> / بررسی وضعیت</div>
+<h1>وضعیت {{ node.name }}</h1><section class="card"><table><thead><tr><th>آزمون</th><th>نتیجه</th></tr></thead><tbody>
+{% for key,value in status.items() %}<tr><td dir="ltr">{{key}}</td><td dir="ltr">{{value}}</td></tr>{% endfor %}</tbody></table></section>
+<p class="tip">GRE ping failed معمولاً به معنی مسدود بودن پروتکل 47 در شبکه، اشتباه بودن Public IP یا اختلال مسیر GRE است.</p>{% endblock %}
