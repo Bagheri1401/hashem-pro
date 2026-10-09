@@ -1,4 +1,4 @@
-# Changelog
+# Hashem Pro — Changelog
 
 ## v0.1.0 — initial MVP
 
