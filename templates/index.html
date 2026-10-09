@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% block content %}
+<div class="head"><div><span class="eyebrow">NETWORK OPERATIONS</span><h1>مدیریت تانل‌ها</h1><p class="muted">ایران، نقطه اتصال کاربران — هر سرور خارج، مسیر GRE و FRP مستقل</p></div><div class="summary"><b>{{ nodes|length }}</b><small>سرور خارج ثبت‌شده</small></div></div>
+<div class="columns"><section class="card"><h2>سرورهای خارج</h2>
+{% if nodes %}<div class="node-list">{% for node in nodes %}<a class="node" href="/nodes/{{ node.id }}">
+<div><b><span class="dot {{ 'on' if node.gre=='active' and node.frps=='active' else 'off' }}"></span> {{ node.name }}</b><div class="muted ltr">{{ node.foreign_public_ip }}</div></div>
+<div class="node-meta"><span class="tag">GRE: {{ node.gre }}</span><span class="tag">FRPS: {{ node.frps }}</span><strong>←</strong></div></a>{% endfor %}</div>
+{% else %}<div class="empty">هنوز سرور خارجی ثبت نشده است. از فرم کناری اولین سرور را اضافه کنید.</div>{% endif %}</section>
+<section class="card"><h2>افزودن سرور خارج</h2><form method="post" action="/nodes" class="stack"><input type="hidden" name="csrf" value="{{ csrf }}">
+<label>نام دلخواه <input name="name" placeholder="مثلاً آلمان ۱" minlength="2" maxlength="48" required></label>
+<label>IP عمومی سرور ایران <input name="iran_public_ip" class="ltr" placeholder="1.2.3.4" required></label>
+<label>IP عمومی سرور خارج <input name="foreign_public_ip" class="ltr" placeholder="5.6.7.8" required></label>
+<div class="two"><label>پورت SSH خارج<input name="ssh_port" type="number" value="22" min="1" max="65535" required></label>
+<label>MTU<input name="mtu" type="number" value="1400" min="1280" max="1476" required></label></div>
+<button class="primary" type="submit">+ افزودن سرور</button>
+</form><p class="tip">نیازمند Ubuntu/Debian، دسترسی SSH روت با کلید و نصب FRP در هر دو سمت.</p></section></div>
+<div class="notice"><b>ساختار مسیر:</b> کاربران → IP عمومی ایران و پورت اختصاصی → FRPS ایران → GRE → FRPC خارج → سرویس محلی خارج.</div>
+{% endblock %}
