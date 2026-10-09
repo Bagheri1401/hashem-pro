@@ -37,7 +37,7 @@ else
 fi
 cat > /etc/systemd/system/grefrp-panel.service <<'UNIT'
 [Unit]
-Description=Private GRE + FRP management panel
+Description=Hashem Pro GRE + FRP management panel
 Wants=network-online.target
 After=network-online.target
 [Service]
@@ -57,7 +57,7 @@ WantedBy=multi-user.target
 UNIT
 systemctl daemon-reload
 systemctl enable --now grefrp-panel.service
-printf '\n===== Panel installed =====\n'
+printf '\n===== Hashem Pro panel installed =====\n'
 printf 'Local URL: http://127.0.0.1:8765\n'
 printf 'Public SSH key to authorize on each foreign node:\n'
 cat /etc/grefrp/id_ed25519.pub
