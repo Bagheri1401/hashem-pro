@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}ورود مدیر | GRE+FRP{% endblock %}{% block content %}
+<section class="login card"><h1>ورود به پنل مدیریت</h1><p class="muted">فقط مدیر سرور مجاز به ورود است.</p>
+<form method="post" action="/login" class="stack"><input type="hidden" name="csrf" value="{{ csrf }}">
+<label>نام کاربری<input name="username" autocomplete="username" required></label>
+<label>رمز عبور<input type="password" name="password" autocomplete="current-password" required></label>
+<button type="submit" class="primary">ورود</button></form></section>
+{% endblock %}
