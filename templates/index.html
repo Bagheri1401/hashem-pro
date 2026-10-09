@@ -1,5 +1,5 @@
 {% extends "base.html" %}{% block content %}
-<div class="head"><div><span class="eyebrow">NETWORK OPERATIONS</span><h1>مدیریت تانل‌ها</h1><p class="muted">ایران، نقطه اتصال کاربران — هر سرور خارج، مسیر GRE و FRP مستقل</p></div><div class="summary"><b>{{ nodes|length }}</b><small>سرور خارج ثبت‌شده</small></div></div>
+<div class="head"><div><span class="eyebrow">NETWORK OPERATIONS</span><h1>Hashem Pro | مدیریت تانل‌ها</h1><p class="muted">ایران، نقطه اتصال کاربران — هر سرور خارج، مسیر GRE و FRP مستقل</p></div><div class="summary"><b>{{ nodes|length }}</b><small>سرور خارج ثبت‌شده</small></div></div>
 <div class="columns"><section class="card"><h2>سرورهای خارج</h2>
 {% if nodes %}<div class="node-list">{% for node in nodes %}<a class="node" href="/nodes/{{ node.id }}">
 <div><b><span class="dot {{ 'on' if node.gre=='active' and node.frps=='active' else 'off' }}"></span> {{ node.name }}</b><div class="muted ltr">{{ node.foreign_public_ip }}</div></div>

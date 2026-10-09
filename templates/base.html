@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}GRE + FRP Manager{% endblock %}</title><link rel="stylesheet" href="/static/style.css"></head>
-<body><header class="top"><div class="wrapper flex"><a href="/" class="brand"><span class="brand-icon">⇄</span> GRE + FRP <small>CONTROL CENTER</small></a>
+<title>{% block title %}Hashem Pro{% endblock %}</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><header class="top"><div class="wrapper flex"><a href="/" class="brand"><span class="brand-icon">⇄</span> Hashem Pro <small>GRE + FRP</small></a>
 {% if request.session.get('admin') %}<form method="post" action="/logout"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="text-btn" type="submit">خروج امن</button></form>{% endif %}
 </div></header><main class="wrapper">
 {% if message %}<div class="alert success">{{ message }}</div>{% endif %}{% if error %}<div class="alert error">{{ error }}</div>{% endif %}
-{% block content %}{% endblock %}</main><footer class="wrapper foot">GRE+FRP Manager · مدیریت خصوصی سرورهای شخصی · ورژن آزمایشی 0.1</footer></body></html>
+{% block content %}{% endblock %}</main><footer class="wrapper foot">Hashem Pro · مدیریت خصوصی تونل‌های GRE + FRP · ورژن آزمایشی 0.1</footer></body></html>
